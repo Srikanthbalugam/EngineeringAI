@@ -1,0 +1,39 @@
+<h1 style="color:blue" class="text-center"><u>Engineering AI</u></h1>
+<div class="container-fluid">
+  <!-- this is for searchfilter -->
+  <input type="text" [(ngModel)]="searching" placeholder="Search based on title" class="my-3" style="width:16%">
+  <!-- This is for displaying the data in table format -->
+  <table class="table table-bordered">
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Created_at</th>
+      <th>Author</th>
+    </tr>
+    <tr *ngFor="let columndata of getApiData | search:searching" data-toggle="modal" data-target="#dataModal"
+      (click)="getRowDetails(columndata)">
+      <td style="width:25%">{{ columndata.title }}</td>
+      <td style="width:25%">{{ columndata.url }}</td>
+      <td style="width:25%">{{ columndata.created_at }}</td>
+      <td style="width:25%">{{ columndata.author }}</td>
+    </tr>
+  </table>
+</div>
+<!-- This is for modal -->
+<div class="modal fade" id="dataModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Row Json Data</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+      <div class="modal-body">
+        <!-- This is for converting RowData into json -->
+        <pre>{{ rowJsonData|json }}</pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
